@@ -6,7 +6,7 @@
    * - 追加はCONFIG.buttonsへ行追加のみ
    * ================================ */
   const CONFIG = {
-    // 処理を行いたくない一覧の名称（例：システム用ビュー）
+    // ボタンを設置しない一覧の名称（例：システム用ビュー）
     skipViewName: "【システム】",
 
     // ボタン共通スタイル
@@ -33,6 +33,8 @@
     ]
   };
 
+  const urlByView = (viewId, appId) => `${location.origin}/k/${appId}/?view=${viewId}`;
+
   kintone.events.on("app.record.index.show", function (event) {
     if (event.viewName === CONFIG.skipViewName) return;
 
@@ -40,7 +42,6 @@
     if (!space || document.getElementById("my_index_button")) return;
 
     const appId = kintone.app.getId();
-    const urlByView = (viewId) => `${location.origin}/k/${appId}/?view=${viewId}`;
 
     const fragment = document.createDocumentFragment();
 
@@ -64,7 +65,7 @@
       // クリック動作（viewId優先。hrefがあれば外部リンクも可能）
       btn.addEventListener("click", () => {
         if (btnDef.viewId) {
-          location.href = urlByView(btnDef.viewId);
+          location.href = urlByView(btnDef.viewId, appId);
         } else if (btnDef.href) {
           window.open(btnDef.href, "_blank");
         }
