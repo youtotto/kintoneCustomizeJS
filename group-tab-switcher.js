@@ -24,13 +24,13 @@
 
     // 配色パレット（必要に応じて追加OK）
     palette: {
-      gray:  '#D3D3D3',
-      pink:  '#FFC0CB',
+      gray: '#D3D3D3',
+      pink: '#FFC0CB',
       wheat: '#F5DEB3',
       lemon: '#FFFACD',
-      mint:  '#9BF9CC',
-      pale:  '#AFEEEE',
-      violet:'#DCC2FF'
+      mint: '#9BF9CC',
+      pale: '#AFEEEE',
+      violet: '#DCC2FF'
     },
 
     // 初期背景色（非アクティブ）
@@ -47,11 +47,11 @@
      * - activeBg: palette のキー名
      */
     tabs: [
-      { label: 'Tab 1', width: 100, group: 'group01', activeBg: 'pink'   },
-      { label: 'Tab 2', width: 100, group: 'group02', activeBg: 'wheat'  },
-      { label: 'Tab 3', width: 100, group: 'group03', activeBg: 'lemon'  },
-      { label: 'Tab 4', width: 100, group: 'group04', activeBg: 'mint'   },
-      { label: 'Tab 5', width: 100, group: 'group05', activeBg: 'pale'   },
+      { label: 'Tab 1', width: 100, group: 'group01', activeBg: 'pink' },
+      { label: 'Tab 2', width: 100, group: 'group02', activeBg: 'wheat' },
+      { label: 'Tab 3', width: 100, group: 'group03', activeBg: 'lemon' },
+      { label: 'Tab 4', width: 100, group: 'group04', activeBg: 'mint' },
+      { label: 'Tab 5', width: 100, group: 'group05', activeBg: 'pale' },
       { label: 'Admin', width: 100, group: 'group06', activeBg: 'violet' },
     ]
   };
@@ -91,10 +91,10 @@
     }
   }
 
-  kintone.events.on(CONFIG.triggers, function () {
+  kintone.events.on(CONFIG.triggers, function (event) {
 
     // タブボタンを描画するスペースのフィールド
-    const space = kintone.app.record.getSpaceElement('TAB_MENU'); 
+    const space = kintone.app.record.getSpaceElement('TAB_MENU');
     if (!space) return; // スペース未配置なら何もしない
 
     if (document.getElementById('tabButton')) return; // 二重描画防止
@@ -132,6 +132,8 @@
 
     // 初期表示タブ
     applyActiveState(CONFIG.defaultIndex, buttonElements);
+
+    return event;
   });
 
 })();
