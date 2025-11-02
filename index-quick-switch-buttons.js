@@ -5,17 +5,17 @@
    * 汎用ボタン版（テンプレート）
    * - 追加はCONFIG.buttonsへ行追加のみ
    * ================================ */
-  // 追加：シンプルな色セット（意味だけ薄く付けたやつ）
+  // シンプルな色セット
   const COLORS = {
-    overview: '#E7F0FF', // 概要=淡いブルー
-    ops: '#EDE9FE', // 業務一覧=淡いパープル
-    pricing: '#FFE8CC', // 料金/契約=薄いオレンジ
-    kpi: '#D1FADF', // KPI/生産性=淡いグリーン
-    rules: '#E5E7EB', // 標準/ルール=グレー
-    product: '#CCFBF1', // 製品/サービス=ティール
-    request: '#FECACA', // 申請/延長=薄いレッド
-    efiling: '#BAE6FD', // 電子手続=ライトブルー
-    monthly: '#FDE68A'  // 月次チェック=イエロー
+    overview: '#E7F0FF', // 淡いブルー
+    ops: '#EDE9FE', // 淡いパープル
+    pricing: '#FFE8CC', // 薄いオレンジ
+    kpi: '#D1FADF', // 淡いグリーン
+    rules: '#E5E7EB', // グレー
+    product: '#CCFBF1', // ティール
+    request: '#FECACA', // 薄いレッド
+    efiling: '#BAE6FD', // ライトブルー
+    monthly: '#FDE68A'  // イエロー
   };
 
   const CONFIG = {

@@ -1,0 +1,10 @@
+dist/
+dest/
+node_modules/
+*.zip
+*.ppk
+*.key
+private.key
+.env
+.vscode/
+.DS_Store
