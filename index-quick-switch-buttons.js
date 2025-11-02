@@ -5,30 +5,43 @@
    * 汎用ボタン版（テンプレート）
    * - 追加はCONFIG.buttonsへ行追加のみ
    * ================================ */
+  // 追加：シンプルな色セット（意味だけ薄く付けたやつ）
+  const COLORS = {
+    overview: '#E7F0FF', // 概要=淡いブルー
+    ops: '#EDE9FE', // 業務一覧=淡いパープル
+    pricing: '#FFE8CC', // 料金/契約=薄いオレンジ
+    kpi: '#D1FADF', // KPI/生産性=淡いグリーン
+    rules: '#E5E7EB', // 標準/ルール=グレー
+    product: '#CCFBF1', // 製品/サービス=ティール
+    request: '#FECACA', // 申請/延長=薄いレッド
+    efiling: '#BAE6FD', // 電子手続=ライトブルー
+    monthly: '#FDE68A'  // 月次チェック=イエロー
+  };
+
   const CONFIG = {
     // ボタンを設置しない一覧の名称（例：システム用ビュー）
     skipViewName: "【システム】",
 
     // ボタン共通スタイル
     baseStyle: {
-      height: "30px",
-      fontSize: "12px",
+      height: "48px",
+      fontSize: "14px",
       border: "1px solid #D3D3D3",
       borderRadius: "5px",
-      marginRight: "5px"
+      marginRight: "16px"
     },
 
     // 各ボタン定義（※ viewId はご利用環境に合わせて維持/変更してください）
     buttons: [
-      { label: "概要", viewId: 5758653, width: 60, bg: "#FFC0CB" },
-      { label: "業務一覧", viewId: 5741508, width: 70, bg: "#F5DEB3" },
-      { label: "料金/契約", viewId: 5758650, width: 80, bg: "#FFFACD" },
-      { label: "KPI/生産性", viewId: 5757874, width: 90, bg: "#9BF9CC" },
-      { label: "標準/ルール", viewId: 5758648, width: 95, bg: "#AFEEEE" },
-      { label: "製品/サービス", viewId: 5758646, width: 110, bg: "#DCC2FF" },
-      { label: "申請/延長", viewId: 5759549, width: 80, bg: "#FFC0CB" },
-      { label: "電子手続", viewId: 5758245, width: 75, bg: "#F5DEB3" },
-      { label: "月次チェック", viewId: 5771619, width: 95, bg: "#FFFACD" },
+      { label: "概要", viewId: 5758653, width: 60, bg: COLORS.overview },
+      { label: "業務一覧", viewId: 5741508, width: 70, bg: COLORS.ops },
+      { label: "料金/契約", viewId: 5758650, width: 80, bg: COLORS.pricing },
+      { label: "KPI/生産性", viewId: 5757874, width: 90, bg: COLORS.kpi },
+      { label: "標準/ルール", viewId: 5758648, width: 95, bg: COLORS.rules },
+      { label: "製品/サービス", viewId: 5758646, width: 110, bg: COLORS.product },
+      { label: "申請/延長", viewId: 5759549, width: 80, bg: COLORS.request },
+      { label: "電子手続", viewId: 5758245, width: 75, bg: COLORS.efiling },
+      { label: "月次チェック", viewId: 5771619, width: 110, bg: COLORS.monthly },
       // 例）{ label: "外部リンク", href: "https://example.com", width: 90, bg: "#9BF9CC" }
     ]
   };
@@ -51,8 +64,8 @@
       // 二重描画防止用IDは先頭ボタンに付与
       if (i === 0) {
         btn.id = "my_index_button";
-        btn.style.marginLeft = "20px";
-        btn.style.marginBottom = "5px";
+        btn.style.marginLeft = "24px";
+        btn.style.marginBottom = "16px";
       }
 
       // 共通スタイル + 個別スタイル
