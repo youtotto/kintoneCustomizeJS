@@ -10,19 +10,30 @@
             'app.record.edit.show'
         ],
 
-        // フィールド「コード」を列挙
-        fields: [
+        // 非表示にするフィールド「コード」
+        hiddenFields: [
             'GRP_BASIC',   // 例：グループ
             'KOKCD',       // 例：文字列(1行)
-            'TELNO1',      // 例：電話番号
+        ],
+
+        // 入力不可にするフィールド「コード」
+        disabledFields: [
+            'ADDR1',
+            'ADDR2',
         ],
     };
 
     kintone.events.on(CONFIG.triggers, function (event) {
 
+        const record = event.record;
+
         // 繰り返し処理でフィールドを非表示にする
-        CONFIG.fields.forEach((code) => {
+        CONFIG.hiddenFields.forEach((code) => {
             kintone.app.record.setFieldShown(code, false);
+        });
+
+        CONFIG.disabledFields.forEach((code) => {
+            if (record[code]) record[code].disabled = true;
         });
 
         return event;
