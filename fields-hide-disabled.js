@@ -32,6 +32,7 @@
             kintone.app.record.setFieldShown(code, false);
         });
 
+        // 入力不可（create/edit 画面のみ意味がある）
         CONFIG.disabledFields.forEach((code) => {
             if (record[code]) record[code].disabled = true;
         });
