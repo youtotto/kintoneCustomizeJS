@@ -67,11 +67,12 @@
    */
   const urlByView = (viewId, appId) => `${location.origin}/k/${appId}/?view=${viewId}`;
 
+  
   // ===============================================
-  // 🎁 メイン処理
+  // 🚀 メイン処理
   // ===============================================
 
-  // レコード一覧画面が表示された直後（index.show）に処理を実行
+  // 設定されたイベントにハンドラーを登録
   kintone.events.on("app.record.index.show", function (event) {
 
     // 1. スキップ対象のビュー名チェック

@@ -17,6 +17,9 @@
             // モバイル版のイベントが必要な場合は、追加してください。
         ],
 
+        // フォームに配置された「スペース」フィールドのフィールドコード（推奨コード: TAB_MENU）
+        tabSpace: 'TAB_MENU',
+
         // 🎨 タブボタンの共通スタイル
         baseStyle: {
             height: '30px',
@@ -102,7 +105,7 @@
 
         // 3. アクティブなタブの色を変更し、対応するグループを表示する
         const activeColor = CONFIG.palette[active.activeBg] || active.activeBg || defaultBg;
-        
+
         // アクティブなボタンの色変更
         if (btnEls[index]) btnEls[index].style.background = activeColor;
 
@@ -118,12 +121,11 @@
     // 🚀 メイン処理
     // ===============================================
 
-    // 設定された画面表示イベントにハンドラーを登録
+    // 設定されたイベントにハンドラーを登録
     kintone.events.on(CONFIG.triggers, function (event) {
 
         // 1. タブボタンを描画するスペース要素を取得
-        // フォームに配置された「スペース」フィールドのフィールドコードを 'TAB_MENU' と仮定
-        const space = kintone.app.record.getSpaceElement('TAB_MENU');
+        const space = kintone.app.record.getSpaceElement(CONFIG.tabSpace);
         if (!space) return event; // スペース未配置なら処理を終了
 
         // 2. 二重描画防止チェック
