@@ -1,32 +1,59 @@
 (function () {
-    "use strict";
+    'use strict';
+
+    /* フィールドとサブテーブル内のルックアップ列を自動取得する */
 
     // ====== 設定を1か所に集約 ======
     const CONFIG = {
-        // どの画面でフィールドを自動ルックアップするか（新規/編集）
         triggers: [
             'app.record.create.show',
-            'app.record.edit.show'
+            'app.record.edit.show',
+            'mobile.app.record.create.show',
+            'mobile.app.record.edit.show',
         ],
 
-        // ルックアップしたいフィールド「コード」
+        // 通常フィールド（キー）
         lookupFields: [
-            'lookupField',
+            '顧客名',
         ],
 
+        // サブテーブルのルックアップ列（キー）
+        // 例）{ table: '明細テーブル', column: '商品名' }
+        subtableLookups: [
+            { table: '明細テーブル', column: '商品名' },
+        ],
     };
 
-    kintone.events.on(CONFIG.triggers, function (event) {
+    kintone.events.on(CONFIG.triggers, (event) => {
+        const rec = event.record;
+        let changed = false;
 
-        const record = event.record;
-
-        // 繰り返し処理でルックアップ取得
+        // --- 通常フィールド ---
         CONFIG.lookupFields.forEach((code) => {
-            if (!record[`${code}`] || !record[`${code}`].value) return;
-            record[`${code}`].lookup = true;
+            const f = rec[code];
+            const hasKey = f && String(f.value ?? '') !== '';
+            if (hasKey) {
+                f.lookup = true; // ← lookup=true を立てるだけ。実行は set() で。
+                changed = true;
+            }
+        });
+
+        // --- サブテーブル列 ---
+        CONFIG.subtableLookups.forEach(({ table, column }) => {
+            const tbl = rec[table];
+            // 教育メモ：サブテーブル本体は { type:'SUBTABLE', value:[{id, value:{...}}] } の形
+            if (!tbl || !Array.isArray(tbl.value)) return;
+
+            tbl.value.forEach((row) => {
+                const cell = row.value[column];
+                const hasKey = cell && String(cell.value ?? '') !== '';
+                if (hasKey) {
+                    cell.lookup = true;
+                    changed = true;
+                }
+            });
         });
 
         return event;
     });
-
 })();
