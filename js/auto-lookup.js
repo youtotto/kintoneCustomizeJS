@@ -33,7 +33,7 @@
             const f = rec[code];
             const hasKey = f && String(f.value ?? '') !== '';
             if (hasKey) {
-                f.lookup = true; // ← lookup=true を立てるだけ。実行は set() で。
+                f.lookup = true;
                 changed = true;
             }
         });
