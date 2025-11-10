@@ -12,7 +12,7 @@
     showOnEdit: true,
     scrollOffset: 240, // スクロール位置補正(px)
     openOnInit: true, // ← 追加：初期表示でパネルを開く
-    panelHeight: 30,
+    panelHeight: '30vh',
     items: [
       { text: '基本情報', level: 0 },
       { text: '顧客情報', level: 1 },
