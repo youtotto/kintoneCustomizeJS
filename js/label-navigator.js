@@ -10,7 +10,9 @@
   const CONFIG = {
     showOnDetail: true,
     showOnEdit: true,
-    scrollOffset: 120, // スクロール位置補正(px)
+    scrollOffset: 240, // スクロール位置補正(px)
+    openOnInit: true, // ← 追加：初期表示でパネルを開く
+    panelHeight: 30,
     items: [
       { text: '基本情報', level: 0 },
       { text: '顧客情報', level: 1 },
@@ -33,8 +35,8 @@
         box-shadow: 0 2px 6px rgba(0,0,0,.18); z-index: 2001; user-select: none;
       }
       .toc-panel {
-        position: fixed; right: 16px; bottom: -60vh;
-        width: 240px; height: 60vh; background: #fff;
+        position: fixed; right: 16px; bottom: -60vh; /* 初期は隠す（実値はJSで上書き） */
+        width: 240px; background: #fff;
         border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px 20px;
         overflow-y: auto; box-shadow: 0 -6px 18px rgba(0,0,0,.18);
         transition: bottom .25s ease; z-index: 2000;
@@ -68,7 +70,7 @@
 
   // ===== 目次描画 =====
   function renderToc() {
-    // 既存のUIを除去（再描画対策）
+    // 再描画対策：既存UIを除去
     document.getElementById('toc-mini-panel')?.remove();
     document.getElementById('toc-mini-btn')?.remove();
 
@@ -96,6 +98,7 @@
     const panel = document.createElement('div');
     panel.id = 'toc-mini-panel';
     panel.className = 'toc-panel';
+    panel.style.height = CONFIG.panelHeight; // ← 高さを反映
 
     // リスト
     const ul = document.createElement('ul');
@@ -124,15 +127,20 @@
 
     panel.appendChild(ul);
 
-    // 開閉
+    // 開閉制御
     let open = false;
-    btn.onclick = () => {
-      open = !open;
-      panel.style.bottom = open ? '64px' : '-60vh';
-    };
+    const openPanel = () => { open = true; panel.style.bottom = '64px'; };
+    const closePanel = () => { open = false; panel.style.bottom = `-${CONFIG.panelHeight}`; };
+    const togglePanel = () => (open ? closePanel() : openPanel());
+
+    btn.onclick = togglePanel;
 
     // 追加
     (document.getElementById('record-gaia') || document.body).append(btn, panel);
+
+    // 初期表示で開く
+    if (CONFIG.openOnInit) openPanel();
+    else closePanel(); // 明示的に閉じ状態へ
   }
 
   // ===== kintoneイベント =====
@@ -143,4 +151,5 @@
     if (ev.type === 'app.record.edit.show' && CONFIG.showOnEdit) renderToc();
     return ev;
   });
+
 })();
