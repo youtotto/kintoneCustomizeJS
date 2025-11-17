@@ -11,9 +11,9 @@ kintone 開発の現場でよく必要になる
 - 商用利用OK
 
 初心者〜上級者まで、そのまま or 改造して使えます。
-
+　
 ---
-
+　
 ## 📁 収録テンプレ一覧
 
 ### 🟦 入力補助（Input Assist）
@@ -43,8 +43,9 @@ kintone 開発の現場でよく必要になる
 | ファイル名                        | 概要           | 主な用途     |
 | ---------------------------- | ------------ | -------- |
 | `progress-to-next-status.js` | 保存後ステータス自動遷移 | 承認フロー自動化 |
-
-
+　
+---
+　
 ## 🚀 使い方（共通）
 1. 使いたい .js ファイルをダウンロード
 GitHub の対象テンプレをクリック → Download raw file
@@ -63,7 +64,9 @@ const CONFIG = {
   ...
 };
 ```
-
+　
+---
+　
 ## 💡 Templates / Snippets / Documents
 
 https://github.com/youtotto/kintone-app-toolkit
@@ -148,9 +151,9 @@ Toolkit を使うと、この3つがシームレスにつながり：
 - → ✔ 構造可視化（Field Scanner / Relations）
 
 という “kintone開発エコシステム” が 1つのUXとして成立します。
-
+　
 ---
-
+　
 ## 📘 テンプレ別：詳細ガイド
 
 ### 🔹 field-hide-disabled.js
@@ -353,19 +356,19 @@ spaceCode: 'BTN_AREA',
 tableCode: '明細',
 subtableSetField: '商品コード'
 ```
-
-
+　
+---
+　
 ## 🔧 開発の考え方（作者メモ）
 - コードは「小さく・依存ゼロ」にこだわる
 - カスタマイズ初心者でも読めるようコメント多め
 - 地味だけど“現場で効く”ものだけ収録
 - すべて MIT ライセンス（商用OK / 改変OK）
-
+　
 ## 📄 ライセンス
 MIT License
 自由に利用・改変・再配布していただけます。
-
-
+　
 ## 👤 作者
 河合祐斗（こん太ぱぱ）
 - note: https://note.com/konta_papa
