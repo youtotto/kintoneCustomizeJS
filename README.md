@@ -69,6 +69,8 @@ const CONFIG = {
 本リポジトリの JavaScript テンプレート（Customization JS Templates）は、  
 Toolkit の **Templates → JS Templates** から直接読み込み・編集できます。
 
+https://github.com/youtotto/kintone-app-toolkit
+
 ### 🔥 なぜ Toolkit 上で使うと便利なのか？
 - **フィールドコード補完**（kintoneアプリから自動取得）
 - **Monaco エディタ**でコード補完・ハイライト・折りたたみ・検索が使える
