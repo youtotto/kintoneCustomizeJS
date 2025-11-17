@@ -64,30 +64,92 @@ const CONFIG = {
 };
 ```
 
-## 💡 Templates タブで使うと “最も便利” です
-
-本リポジトリの JavaScript テンプレート（Customization JS Templates）は、  
-Toolkit の **Templates → JS Templates** から直接読み込み・編集できます。
+## 💡 Templates / Snippets / Documents
 
 https://github.com/youtotto/kintone-app-toolkit
 
-### 🔥 なぜ Toolkit 上で使うと便利なのか？
-- **フィールドコード補完**（kintoneアプリから自動取得）
-- **Monaco エディタ**でコード補完・ハイライト・折りたたみ・検索が使える
-- **Snippets（スニペット）** を使ってコードの骨組みを瞬時に差し込める
-- **Documents（要件書テンプレ）** と並行で開発できる
-- **Upload & Deploy** と連携し、テンプレからそのままデプロイ可能
-- **Field Scanner** と併用すると、変更の影響範囲も即確認できる
+Toolkit と連携する “3階層構造”
 
-### 💼 実務ではこんな流れが鉄板
-1. Templates タブでテンプレを選択  
-2. CONFIG のフィールドコード部分だけ差し替え  
-3. 動作をその場で確認（Customize タブ経由）  
-4. 問題なければ **Upload & Deploy** で反映  
-5. 必要に応じて Field Scanner で影響範囲をチェック  
+Toolkit の Templates タブでは、このリポジトリの3種類の素材をすべて読み込み、
+開発 → 設計 → ドキュメント化 → デプロイ までを一気通貫で扱えます。
 
-kintone カスタマイズを **「コピー → 編集 → デプロイ」** の3ステップで高速化できます。
+### 1️⃣ JS Templates（JavaScriptテンプレート集）
+現場でそのまま使えるカスタマイズJS
+この README で紹介している「JSテンプレート」はすべて Toolkit Templates → JS Templates から直接開けます。
 
+機能は主に：
+| 種類                 | 目的              |
+| ------------------ | --------------- |
+| 入力補助（Input Assist） | 入力自動化・整形・候補選択UI |
+| 表示改善（UX / UI）      | タブ化・目次・ビュー切替    |
+| 自動化（Automation）    | 採番・自動ステータス遷移    |
+| データ品質（Validation）  | 複合条件バリデーション     |
+
+
+Toolkit 上で開くと：
+- フィールドコード補完
+- Snippets 挿入
+- カスタマイズJS の即時実行テスト
+- Upload & Deploy までワンストップ
+で扱えます。
+
+### 2️⃣ Snippets（JSコード断片・ユーティリティ）
+「JSの書き始め」を楽にするユーティリティ集
+Snippets は、テンプレより小さな「JS断片」です。
+Toolkit 内では JS Templates の補助素材 として使われます。
+
+収録中の Snippets例：
+| ファイル                 | 役割                           |
+| -------------------- | ---------------------------- |
+| `basic-utility.js`   | API ショートカット / ロガー / クエリエスケープ |
+| `config-template.js` | CONFIG ブロックの雛形               |
+| `event-bundling.js`  | PC/モバイル両対応のイベント束             |
+
+
+- JS テンプレを改造したい
+- 小さなユーティリティだけ取り込みたい
+- 既存コードの品質を Toolkit 流に統一したい
+
+Toolkit Templates の Snippets カテゴリからワンクリックで挿入できます。
+
+
+### 3️⃣ Documents（構成・レビュー・要件定義のテンプレ）
+kintoneの設計・議論・改善を“構造化”するためのドキュメント集
+Toolkit の Documents → Markdown Editor から直接開けます。
+
+| ファイル                      | 内容           | 用途           |
+| ------------------------- | ------------ | ------------ |
+| `kintoneアプリ現状整理ドキュメント.md` | アプリ構成の棚卸・可視化 | 初期ヒアリング・引継ぎ  |
+| `kintone開発レビュー依頼.md`      | レビュー依頼テンプレ   | 開発後レビュー依頼    |
+| `kintone要件定義書.md`         | 要件定義テンプレ     | 新規開発・改修要件まとめ |
+| `改善提案ドキュメント.md`           | 改善テーマの整理     | PoC・業務改善提案   |
+| `問題提起ドキュメント.md`           | 問題定義と根因分析    | 問題解決の起点作り    |
+| `議論整理ドキュメント.md`           | 議論の論点整理      | 合意形成・議事録として  |
+
+#### 💡 Documents の強み
+- Markdownで構造化
+- Toolkit 上で編集 → コピペ → 共有可能
+- AIプロンプト生成（要件書→AI要求文自動生成）も対応
+- 現場とのレビューサイクルを高速化
+
+### 🧩 3種類の役割まとめ
+| 種別               | 内容             | 目的           | Toolkitでの扱い      |
+| ---------------- | -------------- | ------------ | ---------------- |
+| **JS Templates** | カスタマイズJS本体     | できることを増やす    | Monacoで編集 → デプロイ |
+| **Snippets**     | コード断片・補助関数     | 書きやすさ・再利用性向上 | テンプレ挿入補助         |
+| **Documents**    | Markdownドキュメント | 整理・議論・要件定義   | AI生成・MDエディタ連携    |
+
+
+Toolkit を使うと、この3つがシームレスにつながり：
+
+**✔ 設計（Documents）**
+- → ✔ 開発（JS Templates + Snippets）
+- → ✔ デプロイ（Customize + Upload & Deploy）
+- → ✔ 構造可視化（Field Scanner / Relations）
+
+という “kintone開発エコシステム” が 1つのUXとして成立します。
+
+---
 
 ## 📘 テンプレ別：詳細ガイド
 
