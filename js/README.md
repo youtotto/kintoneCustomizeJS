@@ -26,6 +26,7 @@ kintone の「JavaScript / CSS カスタマイズ」にそのまま登録して�
 
 | ファイル名                           | 概要                 | 主な用途        |
 | ------------------------------- | ------------------ | ----------- |
+| `field-value-group-switcher.js`         | fieldの値に応じてグループの表示切り替え    | 長いフォームを分割   |
 | `group-tab-switcher.js`         | グループフィールドをタブ化    | 長いフォームを分割   |
 | `label-navigator.js`            | ラベルから“目次”を生成     | 項目ジャンプ      |
 | `index-quick-switch-buttons.js` | 一覧ビュー切替ボタン       | 現場向けナビ設定    |
@@ -89,6 +90,8 @@ hiddenFields: ['GRP_BASIC', 'KOKCD'],   // 非表示
 disabledFields: ['ADDR1', 'ADDR2'],     // 入力不可
 ```
 
+---
+
 ### 🔹 field-validator.js
 複合条件によるフィールドバリデーション（保存前チェック）
 
@@ -112,6 +115,8 @@ validationFields: [
 ]
 ```
 
+---
+
 ### 🔹 group-tab-switcher.js
 グループフィールドを “タブUI” として切り替えるテンプレ
 
@@ -128,6 +133,8 @@ tabs: [
   { label: '詳細', group: 'grp02', activeBg: 'pale' }
 ]
 ```
+
+---
 
 ### 🔹 index-quick-switch-buttons.js
 一覧画面ヘッダに “ビュー切替ボタン” を配置するテンプレ
@@ -146,6 +153,8 @@ buttons: [
 ]
 ```
 
+---
+
 ### 🔹 auto-lookup.js
 通常フィールド & サブテーブルのルックアップを “自動取得”
 
@@ -158,6 +167,8 @@ buttons: [
 lookupFields: ['顧客コード'],
 subtableLookups: [{ table: '明細', column: '商品名' }]
 ```
+
+---
 
 ### 🔹 normalize-fields.js
 保存時に文字列を半角英数字に正規化するテンプレ
@@ -173,6 +184,8 @@ FIELDS_KEEP_SYMBOLS: ['POSTAL'],       // 許容記号を残す
 FIELDS_REMOVE_SYMBOLS: ['TELNO'],      // 記号を全部消す
 ALLOWED_SYMBOLS: '-_.@/'               // 残す記号
 ```
+
+---
 
 ### 🔹 auto-number-on-save.js
 保存時に「日付＋接頭辞＋連番」で自動採番
@@ -191,6 +204,8 @@ PREFIX: 'E',
 SEQ_WIDTH: 3
 ```
 
+---
+
 ### 🔹 dropdown-to-fields-autofill.js
 ドロップダウン選択 → 複数フィールド自動入力
 
@@ -208,6 +223,8 @@ mapping: {
 overwrite: true
 ```
 
+---
+
 ### 🔹 sidebar-closed.js
 レコード画面のコメント／履歴サイドバーを自動で閉じる
 
@@ -219,6 +236,7 @@ overwrite: true
 #### 🛠 CONFIG例
 // 設定不要。デフォルトで全画面に適用される
 
+---
 
 ### 🔹 label-navigator.js
 フォームのラベル（項目名）から“ミニ目次”を生成するUI
@@ -239,6 +257,8 @@ panelHeight: '30vh',
 openOnInit: true
 ```
 
+---
+
 ### 🔹 progress-to-next-status.js
 保存後にプロセス管理のステータスを自動で次に進める
 
@@ -253,6 +273,8 @@ trigger: 'app.record.create.submit.success',
 current: '下書き',
 next: '承認依頼'
 ```
+
+---
 
 ### 🔹 subtable-lookup-selector.js
 参照アプリから候補をボタン化 → クリックでサブテーブル行追加＋ルックアップ実行
@@ -274,4 +296,53 @@ spaceCode: 'BTN_AREA',
 
 tableCode: '明細',
 subtableSetField: '商品コード'
+```
+
+---
+
+### 🔹 field-value-group-switcher.js
+
+フィールドの値に応じて、表示するグループを切り替えるテンプレート
+
+（タブUIは使わず、条件に合うグループだけを表示）
+
+#### 📌 使い所
+- 申請種別・問い合わせ種別などに応じて、入力フォームを出し分けたい
+- 1画面に全部詰め込まず、必要な項目だけ見せたい
+- タブUIは使わず、kintone標準のグループ表示制御で完結させたい
+
+例：
+- 種別A → グループAのみ表示
+- 種別B → グループBのみ表示
+- 未選択 → 何も表示しない／共通グループだけ表示
+
+#### 🧠 動作概要
+
+- 画面表示時、すべての対象グループを一旦非表示
+- 指定フィールドの「値」を取得
+- 値に対応するグループ 1つだけを表示
+- create / edit 画面では、フィールド変更にもリアルタイム追従
+
+#### 🛠 CONFIG例
+```js
+const CONFIG = {
+  EVENTS: [
+    "app.record.detail.show",
+    "app.record.create.show",
+    "app.record.edit.show"
+  ],
+
+  // 判定に使うフィールドコード
+  SWITCH_FIELD_CODE: "switch_field",
+
+  // 値 → 表示するグループ
+  VALUE_GROUP_MAP: {
+    "OPTION_A": "GROUP_A",
+    "OPTION_B": "GROUP_B",
+    "OPTION_C": "GROUP_C"
+  },
+
+  // 未入力・未定義時に表示するグループ（不要なら null）
+  DEFAULT_GROUP: null
+};
 ```
